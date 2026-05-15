@@ -1,0 +1,390 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sales Funnel Audit — Insight Brief</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --pink-deep:    #c9667a;
+            --pink-mid:     #e8899a;
+            --pink-soft:    #f2b8c2;
+            --pink-blush:   #fce8ec;
+            --pink-wash:    #fef6f7;
+            --gold:         #c9a96e;
+            --charcoal:     #2c2420;
+            --warm-grey:    #6b5f5a;
+            --light-grey:   #d4ccc9;
+            --cream:        #faf7f5;
+            --white:        #ffffff;
+            --border:       #ecddd9;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            background-color: var(--cream);
+            color: var(--charcoal);
+            font-family: 'DM Sans', sans-serif;
+            font-weight: 300;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            padding: 48px 20px 64px;
+        }
+        .page { width: 100%; max-width: 780px; }
+        .topbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 48px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid var(--border);
+        }
+        .topbar-left {
+            font-size: 11px;
+            font-weight: 500;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color: var(--pink-deep);
+        }
+        .topbar-right {
+            font-size: 11px;
+            color: var(--warm-grey);
+            letter-spacing: 0.05em;
+        }
+        .hero { margin-bottom: 52px; }
+        .hero-eyebrow {
+            font-size: 11px;
+            font-weight: 500;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--pink-deep);
+            margin-bottom: 14px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .hero-eyebrow::before {
+            content: '';
+            display: inline-block;
+            width: 28px;
+            height: 1px;
+            background-color: var(--pink-deep);
+        }
+        .hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 42px;
+            font-weight: 700;
+            line-height: 1.15;
+            color: var(--charcoal);
+            margin-bottom: 18px;
+            letter-spacing: -0.01em;
+        }
+        .hero h1 em { font-style: normal; color: var(--pink-deep); }
+        .hero-meta { display: flex; gap: 10px; flex-wrap: wrap; }
+        .meta-pill {
+            font-size: 11px;
+            font-weight: 500;
+            letter-spacing: 0.08em;
+            padding: 5px 12px;
+            border-radius: 20px;
+            background-color: var(--pink-blush);
+            color: var(--pink-deep);
+            border: 1px solid var(--pink-soft);
+        }
+        .divider {
+            width: 100%;
+            height: 1px;
+            background: linear-gradient(to right, var(--pink-soft), transparent);
+            margin: 40px 0;
+        }
+        .section { margin-bottom: 44px; }
+        .section-header {
+            display: flex;
+            align-items: baseline;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+        .section-num {
+            font-family: 'Playfair Display', serif;
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--pink-soft);
+            letter-spacing: 0.05em;
+        }
+        .section-title {
+            font-size: 11px;
+            font-weight: 500;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--warm-grey);
+        }
+        .situation-text {
+            font-size: 15px;
+            line-height: 1.85;
+            color: var(--charcoal);
+            font-weight: 300;
+            max-width: 680px;
+            padding-left: 20px;
+            border-left: 2px solid var(--pink-soft);
+        }
+        .finding {
+            display: grid;
+            grid-template-columns: 36px 1fr;
+            gap: 0 18px;
+            margin-bottom: 18px;
+            padding: 20px 24px;
+            background-color: var(--white);
+            border-radius: 10px;
+            border: 1px solid var(--border);
+        }
+        .finding-num {
+            font-family: 'Playfair Display', serif;
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--pink-blush);
+            line-height: 1;
+            padding-top: 2px;
+        }
+        .finding-headline {
+            font-size: 13.5px;
+            font-weight: 500;
+            color: var(--charcoal);
+            margin-bottom: 6px;
+            line-height: 1.4;
+        }
+        .finding-detail {
+            font-size: 13px;
+            line-height: 1.75;
+            color: var(--warm-grey);
+            font-weight: 300;
+        }
+        .finding-detail strong { color: var(--pink-deep); font-weight: 500; }
+        .impact-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 14px;
+        }
+        .impact-card {
+            background-color: var(--white);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 22px 18px;
+            text-align: center;
+        }
+        .impact-card.loss  { border-top: 3px solid #e07070; }
+        .impact-card.risk  { border-top: 3px solid var(--gold); }
+        .impact-card.recover { border-top: 3px solid var(--pink-deep); }
+        .impact-value {
+            font-family: 'Playfair Display', serif;
+            font-size: 26px;
+            font-weight: 700;
+            margin-bottom: 6px;
+            line-height: 1;
+        }
+        .impact-card.loss    .impact-value { color: #c75555; }
+        .impact-card.risk    .impact-value { color: var(--gold); }
+        .impact-card.recover .impact-value { color: var(--pink-deep); }
+        .impact-label {
+            font-size: 11px;
+            color: var(--warm-grey);
+            line-height: 1.5;
+        }
+        .impact-note {
+            margin-top: 14px;
+            font-size: 12px;
+            color: var(--warm-grey);
+            line-height: 1.7;
+            font-style: italic;
+            padding: 12px 16px;
+            background-color: var(--pink-wash);
+            border-radius: 8px;
+            border: 1px solid var(--pink-blush);
+        }
+        .recommendation {
+            display: grid;
+            grid-template-columns: 36px 1fr;
+            gap: 0 18px;
+            margin-bottom: 16px;
+            padding: 22px 24px;
+            background-color: var(--white);
+            border-radius: 10px;
+            border: 1px solid var(--border);
+        }
+        .rec-num {
+            font-family: 'Playfair Display', serif;
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--pink-blush);
+            line-height: 1;
+            padding-top: 2px;
+        }
+        .rec-title {
+            font-size: 12px;
+            font-weight: 500;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--pink-deep);
+            margin-bottom: 8px;
+        }
+        .rec-text {
+            font-size: 13px;
+            line-height: 1.8;
+            color: var(--warm-grey);
+            font-weight: 300;
+        }
+        .rec-text strong { color: var(--charcoal); font-weight: 500; }
+        .footer {
+            margin-top: 52px;
+            padding-top: 22px;
+            border-top: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+        .footer-left { font-size: 11px; color: var(--light-grey); }
+        .footer-right { font-size: 11px; color: var(--pink-deep); font-weight: 500; }
+    </style>
+</head>
+<body>
+<div class="page">
+    <div class="topbar">
+        <div class="topbar-left">Portfolio Project 01 &nbsp;·&nbsp; Sales Funnel Audit</div>
+        <div class="topbar-right">Python · Pandas · Matplotlib · Seaborn</div>
+    </div>
+    <div class="hero">
+        <div class="hero-eyebrow">Executive Insight Brief</div>
+        <h1>Where Is This Pipeline<br><em>Losing Revenue?</em></h1>
+        <div class="hero-meta">
+            <span class="meta-pill">1,200 Records</span>
+            <span class="meta-pill">12 Months</span>
+            <span class="meta-pill">B2B SaaS</span>
+            <span class="meta-pill">6 Core Metrics</span>
+        </div>
+    </div>
+    <div class="section">
+        <div class="section-header">
+            <span class="section-num">01</span>
+            <span class="section-title">The Situation</span>
+        </div>
+        <p class="situation-text">
+            This analysis examined 1,200 sales pipeline records from a B2B SaaS company
+            across a full 12-month period. The goal was to identify precisely where revenue
+            is being lost, quantify the dollar impact of those losses, and surface the
+            three actions that would generate the highest return if prioritised immediately.
+        </p>
+    </div>
+    <div class="divider"></div>
+    <div class="section">
+        <div class="section-header">
+            <span class="section-num">02</span>
+            <span class="section-title">Key Findings</span>
+        </div>
+        <div class="finding">
+            <div class="finding-num">1</div>
+            <div class="finding-body">
+                <div class="finding-headline">The pipeline converts at 7.1% — less than half the industry minimum.</div>
+                <div class="finding-detail">Stage-by-stage drop-off rates sit between 25–35% at every transition,
+                producing an end-to-end Lead → Won rate of 15.2% and an overall win rate of
+                <strong>7.1% against a healthy benchmark of 20–30%.</strong> There is no single
+                catastrophic stage failure — five stages are each losing a third of their deals,
+                compounding into a systemic underperformance problem across the entire funnel.</div>
+            </div>
+        </div>
+        <div class="finding">
+            <div class="finding-num">2</div>
+            <div class="finding-body">
+                <div class="finding-headline">$507,185 in active pipeline value has gone silent past 30 days.</div>
+                <div class="finding-detail">85 deals are neither progressing nor formally closed — occupying
+                sales capacity without moving toward revenue. <strong>10 of those deals sit at
+                Negotiation stage</strong>, the closest point to closing in the entire funnel,
+                making them the single highest-priority intervention target available right now.</div>
+            </div>
+        </div>
+        <div class="finding">
+            <div class="finding-num">3</div>
+            <div class="finding-body">
+                <div class="finding-headline">Enterprise is the worst performing segment on every metric simultaneously.</div>
+                <div class="finding-detail">At a <strong>5.9% win rate and $401 expected value per lead</strong>,
+                Enterprise underperforms both SMB (7.5% win rate, $494 per lead) and Mid-Market
+                (7.0% win rate, $497 per lead) — despite typically receiving disproportionate
+                sales time and resource investment.</div>
+            </div>
+        </div>
+    </div>
+    <div class="divider"></div>
+    <div class="section">
+        <div class="section-header">
+            <span class="section-num">03</span>
+            <span class="section-title">Revenue Impact</span>
+        </div>
+        <div class="impact-grid">
+            <div class="impact-card loss">
+                <div class="impact-value">$665,836</div>
+                <div class="impact-label">Permanently lost<br>to Closed Lost deals</div>
+            </div>
+            <div class="impact-card risk">
+                <div class="impact-value">$507,185</div>
+                <div class="impact-label">At risk in stalled<br>active deals</div>
+            </div>
+            <div class="impact-card recover">
+                <div class="impact-value">$35,926</div>
+                <div class="impact-label">Estimated recoverable<br>if actioned this week</div>
+            </div>
+        </div>
+        <p class="impact-note">
+            The pipeline has already lost more to Closed Lost ($665,836) than it has closed
+            as won revenue ($609,805). The gap between what entered this funnel and what
+            converted to revenue is the core business problem this analysis addresses.
+        </p>
+    </div>
+    <div class="divider"></div>
+    <div class="section">
+        <div class="section-header">
+            <span class="section-num">04</span>
+            <span class="section-title">Recommendations</span>
+        </div>
+        <div class="recommendation">
+            <div class="rec-num">1</div>
+            <div class="rec-body">
+                <div class="rec-title">Launch a Negotiation Sprint — This Week</div>
+                <div class="rec-text">The 10 stalled Negotiation deals represent the highest return per hour
+                of sales effort in the entire pipeline. <strong>Assign a senior rep to contact all 10
+                within 72 hours</strong> with a specific re-engagement offer — a limited-time pricing
+                incentive or expedited onboarding commitment. These deals have already cleared every
+                qualification hurdle. They need a reason to decide, not a reason to be interested.</div>
+            </div>
+        </div>
+        <div class="recommendation">
+            <div class="rec-num">2</div>
+            <div class="rec-body">
+                <div class="rec-title">Introduce a 5-Point Qualification Scorecard at Lead Stage</div>
+                <div class="rec-text">30% of leads stall at the earliest stage before any meaningful sales
+                work has been done. <strong>A mandatory 5-question scorecard covering budget, authority,
+                need, timeline, and competitive alternatives</strong> before advancing any lead to Qualified
+                would eliminate low-probability deals early — freeing reps to focus on Mid-Market where
+                expected value per lead is highest at $497.</div>
+            </div>
+        </div>
+        <div class="recommendation">
+            <div class="rec-num">3</div>
+            <div class="rec-body">
+                <div class="rec-title">Audit Enterprise Pricing Before the Next Budget Cycle</div>
+                <div class="rec-text">Enterprise deals are closing less often for less money than SMB deals —
+                a direct contradiction of where most sales resources are invested.
+                <strong>A pricing and capability audit before approving further Enterprise lead generation
+                spend</strong> is essential. Reallocating just 20% of Enterprise-focused effort toward
+                Mid-Market would be expected to generate more revenue based on current conversion data.</div>
+            </div>
+        </div>
+    </div>
+    <div class="footer">
+        <div class="footer-left">Analysis · 1,200 synthetic CRM records · Python · Pandas · Matplotlib · Seaborn</div>
+        <div class="footer-right">github.com/yourusername/saas-sales-funnel-audit</div>
+    </div>
+</div>
+</body>
+</html>
